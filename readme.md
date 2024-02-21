@@ -22,7 +22,7 @@ ou
 pip install -r requirements.txt
 ~~~
 
-> É necessário ter instalado o FFmpeg no computador. Baixe-o pelo link <https://www.ffmpeg.org/download.html> e siga os passos para instalação.
+> pode ser que seja necessário ter instalado o FFmpeg no computador. Baixe-o pelo link <https://www.ffmpeg.org/download.html> e siga os passos para instalação.
 
 ## Configurações
 Abra o arquivo `yt_capture.py` e modifique os valores

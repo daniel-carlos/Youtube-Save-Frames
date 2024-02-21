@@ -5,10 +5,10 @@ import json
 from yt_dlp import YoutubeDL
 import cv2 as cv
 
-video_url = "https://www.youtube.com/watch?v=TAqZb52sgpU"
-interval=5
-start_time=20
-end_time=67
+video_url = "url de um vídeo do youtube"
+interval = 5 # diferença de tempo (em segundos) entre as capturas
+start_time = 20 # posição (em segundos) da primeira captura
+end_time = 67 # limite de parada (em segundos). 0 ou valores negativos, limite passa a ser a duração do próprio vídeo
 
 def save_image(frame, filename):
     if frame is None:
@@ -42,7 +42,7 @@ def skip_frame(cap):
     cap.grab()
 
 
-def capture_frames(video_url, interval=5, start_time=0, end_time=999999):
+def capture_frames(video_url, interval=5, start_time=0, end_time=-1):
     json_data = json.loads(subprocess.check_output(
         f'yt-dlp -f 22 "{video_url}" -j --skip-download ', shell=True).decode('utf-8').strip())
 
@@ -54,7 +54,7 @@ def capture_frames(video_url, interval=5, start_time=0, end_time=999999):
     video_id = json_data['id']
 
     start_frame = int(start_time * fps)
-    end_frame = int(min(end_time, duration_s) * fps)
+    end_frame = int(min(end_time, duration_s) * fps) if end_time > 0 else (duration_s * fps)
 
     cap = cv.VideoCapture(stream_url)
 
